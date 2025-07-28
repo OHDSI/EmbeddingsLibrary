@@ -1,4 +1,4 @@
-# OpenAI text-embeddings-3-large
+# OpenAI text-embedding-3-large
 
 ## Description
 
