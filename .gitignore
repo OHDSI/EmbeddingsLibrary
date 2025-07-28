@@ -1,0 +1,10 @@
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Claude
+.claude/
+claude.md
+CLAUDE.md
