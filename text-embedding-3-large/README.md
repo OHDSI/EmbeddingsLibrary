@@ -72,11 +72,14 @@ ALTER TABLE cdm.concept
         REFERENCES cdm.concept_embedding (embedding_id);
 ```
 
-### Create Index
+### Create Indexes
 
 ```sql
 CREATE INDEX concept_concept_name_idx
     ON cdm.concept (concept_name);
+
+CREATE INDEX concept_embedding_label_idx
+    ON cdm.concept_embedding (label);
 ```
 
 ### Populate embedding_id in cdm.concept
