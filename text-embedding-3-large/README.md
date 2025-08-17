@@ -10,7 +10,7 @@ text-embedding-3-large model truncated to 1024 dimensions.
 - **Dimensions**: 1024
 - **Case Sensitive**: Yes
 - **Embedding Count**: 6,353,273
-- **Vocabulary**: OMOP CDM August 2024
+- **Vocabulary**: v5.0 30-AUG-24
 - **File Format**: CSV (compressed as .gz)
 - **File Size**: 30GB
 
