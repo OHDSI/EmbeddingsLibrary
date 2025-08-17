@@ -6,6 +6,10 @@ Embeddings from every unique concept_name in the concept table of the v5.0 30-AU
 Created using OpenAI text-embedding-3-large model truncated to 1024 dimensions.
 Truncation was done to prioritize speed and resource usage over precision.
 
+Counts per vocabulary_id of available embeddings for v5.0 27-FEB-25 vocabulary are available in the
+file [available_vecs_for_v5.0_27-FEB-25.csv](./available_vecs_for_v5.0_27-FEB-25.csv)\
+Getting everything to 100% is still on the TODO list
+
 ## Details
 
 - **Dimensions**: 1024
@@ -91,6 +95,21 @@ FROM cdm.concept_embedding ce
 WHERE cdm.concept.concept_name = ce.label;
 ```
 
+### Check how you are doing for coverage of your vocabulary
+
+```sql
+SELECT COALESCE(vocabulary_id, 'TOTAL')                                                  AS vocabulary_id,
+       COUNT(CASE WHEN embedding_id IS NULL THEN 1 END)                                  AS missing_vec_count,
+       COUNT(CASE WHEN embedding_id IS NOT NULL THEN 1 END)                              AS vec_count,
+       COUNT(*)                                                                          AS total_concepts,
+       ROUND(100.0 * COUNT(CASE WHEN embedding_id IS NOT NULL THEN 1 END) / COUNT(*), 2) AS coverage_percent
+FROM cdm.concept
+WHERE concept_name !=
+      'Retired SNOMED UK Drug extension concept, do not use, use concept indicated by the CONCEPT_RELATIONSHIP table, if any'
+GROUP BY ROLLUP (vocabulary_id)
+ORDER BY vocabulary_id NULLS LAST;
+```
+
 Above steps can be also be done for concept_synonym if desired.
 
 ### Create Vector Index
@@ -128,15 +147,17 @@ FROM pg_stat_progress_create_index;
 
 ## Obtaining embeddings
 
+6,353,273 unique strings did not include everything you needed? Get some more...
+
 https://platform.openai.com/docs/guides/embeddings#how-to-get-embeddings
 
 ```python
 from openai import OpenAI
 
 client = OpenAI(api_key="your api key")
-resp = client.embeddings.create(input="The string for which you want an embedding", 
-                               model="text-embedding-3-large",
-                               dimensions=1024)
+resp = client.embeddings.create(input="The string for which you want an embedding",
+                                model="text-embedding-3-large",
+                                dimensions=1024)
 print(resp.data[0].embedding)
 
 ```
