@@ -128,6 +128,8 @@ FROM pg_stat_progress_create_index;
 
 ## Obtaining embeddings
 
+https://platform.openai.com/docs/guides/embeddings#how-to-get-embeddings
+
 ```python
 from openai import OpenAI
 
