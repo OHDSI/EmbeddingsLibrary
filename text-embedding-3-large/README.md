@@ -125,3 +125,16 @@ slow down index construction.
 SELECT phase, ROUND(100.0 * blocks_done / NULLIF(blocks_total, 0), 1) AS "%"
 FROM pg_stat_progress_create_index;
 ```
+
+## Obtaining embeddings
+
+```python
+from openai import OpenAI
+
+client = OpenAI(api_key="your api key")
+resp = client.embeddings.create(input="The string for which you want an embedding", 
+                               model="text-embedding-3-large",
+                               dimensions=1024)
+print(resp.data[0].embedding)
+
+```
