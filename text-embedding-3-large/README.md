@@ -2,9 +2,10 @@
 
 ## Description
 
-Embeddings from every unique concept_name in the concept table of the v5.0 30-AUG-24 vocabulary.
-Created using OpenAI text-embedding-3-large model truncated to 1024 dimensions.
-Truncation was done to prioritize speed and resource usage over precision.
+Embeddings from every unique concept_name in the concept table of the v5.0 30-AUG-24 vocabulary. \
+Besides the concept_name *no* additional details were added when generating the embeddings. \
+Created using OpenAI text-embedding-3-large model truncated to 1024 dimensions. \
+Truncation was done to prioritize speed and resource usage over precision. \
 
 Counts per vocabulary_id of available embeddings for v5.0 27-FEB-25 vocabulary are available in the
 file [available_vecs_for_v5.0_27-FEB-25.csv](./available_vecs_for_v5.0_27-FEB-25.csv)\
